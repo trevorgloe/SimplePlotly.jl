@@ -13,6 +13,21 @@ using PlotlyJS
     plot3Dtest = plot3DObj(traces)
     @test typeof(plot3Dtest) == plot3DObj # make sure the type is correct
     @test isa(plot3Dtest, plotObj) # make sure it is also a subtype of plotObj
+
+    # linetrace, conetrace = quiver3([0.0,1.0,0.0], [1.0,1.0,1.0], name="vector", colorline="blue", colorcone="Blues")
+    linetrace, conetrace = quiver3([0.0,1.0,0.0], [1.0,1.0,1.0])
+    @test typeof(linetrace)==GenericTrace{Dict{Symbol, Any}}
+    @test typeof(conetrace)==GenericTrace{Dict{Symbol, Any}}
+    linetrace, conetrace = quiver3([0.0,1.0,0.0], [1.0,1.0,1.0], name="vector")
+    @test typeof(linetrace)==GenericTrace{Dict{Symbol, Any}}
+    @test typeof(conetrace)==GenericTrace{Dict{Symbol, Any}}
+    linetrace, conetrace = quiver3([0.0,1.0,0.0], [1.0,1.0,1.0], name="vector", colorline="red")
+    @test typeof(linetrace)==GenericTrace{Dict{Symbol, Any}}
+    @test typeof(conetrace)==GenericTrace{Dict{Symbol, Any}}
+    linetrace, conetrace = quiver3([0.0,1.0,0.0], [1.0,1.0,1.0], name="vector", colorline="red", colorcone="Reds")
+    @test typeof(linetrace)==GenericTrace{Dict{Symbol, Any}}
+    @test typeof(conetrace)==GenericTrace{Dict{Symbol, Any}}
+
 end
 
 # @testset "myLS.jl" begin

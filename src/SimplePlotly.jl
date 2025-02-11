@@ -5,7 +5,7 @@ using PlotlyJS
 
 # Write your package code here.
 export plotObj, plot3DObj
-export makePlot
+export makePlot, quiver3
 
 # Module content ===============================================================
 # ORDER MATTERS
