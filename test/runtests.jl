@@ -14,6 +14,7 @@ using PlotlyJS
     @test typeof(plot3Dtest) == plot3DObj # make sure the type is correct
     @test isa(plot3Dtest, plotObj) # make sure it is also a subtype of plotObj
 
+    # test quiver function with different calling options
     # linetrace, conetrace = quiver3([0.0,1.0,0.0], [1.0,1.0,1.0], name="vector", colorline="blue", colorcone="Blues")
     linetrace, conetrace = quiver3([0.0,1.0,0.0], [1.0,1.0,1.0])
     @test typeof(linetrace)==GenericTrace{Dict{Symbol, Any}}
@@ -27,6 +28,21 @@ using PlotlyJS
     linetrace, conetrace = quiver3([0.0,1.0,0.0], [1.0,1.0,1.0], name="vector", colorline="red", colorcone="Reds")
     @test typeof(linetrace)==GenericTrace{Dict{Symbol, Any}}
     @test typeof(conetrace)==GenericTrace{Dict{Symbol, Any}}
+
+    # test mesh3D objects and createMeshTrace function
+    xpts = [0,1,2,0,1]
+    ypts = [0,0,1,2,-1]
+    zpts = [0,2,0,1,0]
+    points = permutedims([xpts;; ypts;; zpts])
+    i=[0, 0, 0, 1, 4, 4, 4]
+    j=[1, 2, 3, 2, 1, 2, 1]
+    k=[2, 3, 1, 3, 2, 0, 0]
+    tri = permutedims([i;; j;; k])
+    mesh3Dtest = mesh3DObj(points, tri)
+    @test typeof(mesh3Dtest) == mesh3DObj
+
+    meshtrace = createMeshTrace(mesh3Dtest)
+    @test typeof(meshtrace) == GenericTrace{Dict{Symbol, Any}}
 
 end
 
