@@ -12,7 +12,7 @@ struct mesh3DObj
     tri::Array{Int64, 2} # List of triangle vertices (will be 3xM with M generally > N)
 
     # constructor
-    function mesh3DObj(points::Array{<:Real, 2}, tri::Array{Int64, 2})
+    function mesh3DObj(points::Array{<:Real, 2}, tri::Array{<:Integer, 2})
         # convert points to float64s
         points = convert(Array{Float64, 2}, points)
         new(points, tri)
