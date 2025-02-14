@@ -44,6 +44,17 @@ using PlotlyJS
     meshtrace = createMeshTrace(mesh3Dtest)
     @test typeof(meshtrace) == GenericTrace{Dict{Symbol, Any}}
 
+    # test simpleParaSurfaceMesh function
+    f(x,y,z) = x^2 + y^2 + z^2 - 1 # sphere
+    x = LinRange(-2,2,100)
+    y = LinRange(-2,2,100)
+    z = LinRange(-2,2,100)
+    xpts, ypts, zpts, connectivity = simpleParaSurfaceMesh(f, x, y, z)
+    @test typeof(xpts) == Array{Float64,1}
+    @test typeof(ypts) == Array{Float64,1}
+    @test typeof(zpts) == Array{Float64,1}
+    @test typeof(connectivity) == Array{Int32, 2}
+
 end
 
 # @testset "myLS.jl" begin
