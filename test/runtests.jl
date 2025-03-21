@@ -46,14 +46,14 @@ using PlotlyJS
 
     # test simpleParaSurfaceMesh function
     f(x, y, z) = x^2 + y^2 + z^2 - 1 # sphere
-    x = LinRange(-2, 2, 100)
-    y = LinRange(-2, 2, 100)
-    z = LinRange(-2, 2, 100)
+    x = LinRange(-2, 2, 40)
+    y = LinRange(-2, 2, 40)
+    z = LinRange(-2, 2, 40)
     xpts, ypts, zpts, triangles = simpleParaSurfaceMesh(f, x, y, z)
     @test typeof(xpts) == Array{Float64,1}
     @test typeof(ypts) == Array{Float64,1}
     @test typeof(zpts) == Array{Float64,1}
-    @test typeof(triangles) == Array{Int32,2}
+    @test typeof(triangles) == Array{Int64,2}
 
 end
 

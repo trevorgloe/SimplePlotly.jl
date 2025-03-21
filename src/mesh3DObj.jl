@@ -2,6 +2,7 @@ using PlotlyJS
 using LinearAlgebra
 # using Delaunay
 using MiniQhull
+using Printf
 
 """
 Objects to creating mesh plots in 3D, specially useful for plotting parametric surfaces
@@ -83,10 +84,10 @@ function simpleParaSurfaceMesh(f::Function, x::AbstractVector, y::AbstractVector
     h = sqrt((x[2] - x[1])^2 + (y[2] - y[1])^2 + (z[2] - z[1])^2)
     numpoints = count(close)
     display(numpoints)
-    triangles = zeros(Int, 0, 0)
+    triangles = zeros(Int, 0, 3)
     for i in 1:length(x_vec)
         # for each point, we look through the vector to find all the points close
-        neighbors = zeros(0)
+        neighbors = zeros(Int, 0)
         for j in 1:length(x_vec)
             # find if the point is within h
             dist = sqrt((x_vec[i] - x_vec[j])^2 + (y_vec[i] - y_vec[j])^2 + (z_vec[i] - z_vec[j])^2)
@@ -97,8 +98,10 @@ function simpleParaSurfaceMesh(f::Function, x::AbstractVector, y::AbstractVector
         # now we've found all the neighbors, construct all posible triangles with verticie at i and other vertices in neighbors
         for k in 1:length(neighbors)-1
             # add triangles
-            append!(triangles, [i neighbors[k] neighbors[k+1]])
+            triangles = cat(triangles, [i, neighbors[k], neighbors[k+1]]', dims=(1, 1))
         end
+        # display(i)
+        @printf("point %i \r", i)
     end
     return x_vec, y_vec, z_vec, triangles
 
