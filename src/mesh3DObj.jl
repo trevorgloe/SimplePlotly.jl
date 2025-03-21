@@ -100,6 +100,6 @@ function simpleParaSurfaceMesh(f::Function, x::AbstractVector, y::AbstractVector
             append!(triangles, [i neighbors[k] neighbors[k+1]])
         end
     end
-    return x_vec, y_vec, z_vec, connectivity
+    return x_vec, y_vec, z_vec, triangles
 
 end
