@@ -91,7 +91,7 @@ function simpleParaSurfaceMesh(f::Function, x::AbstractVector, y::AbstractVector
         for j in 1:length(x_vec)
             # find if the point is within h
             dist = sqrt((x_vec[i] - x_vec[j])^2 + (y_vec[i] - y_vec[j])^2 + (z_vec[i] - z_vec[j])^2)
-            if dist < h
+            if dist < h && dist > 0
                 append!(neighbors, j)
             end
         end
